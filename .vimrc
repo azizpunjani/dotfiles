@@ -6,10 +6,9 @@ set backspace=indent,eol,start
 set expandtab
 set mouse=a
 set nocompatible
-set rtp^=/usr/share/vim/vim72
 set rtp+=~/.vim/bundle/Vundle.vim
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-set runtimepath^=~/.vim
+set rtp^=~/.vim/bundle/ctrlp.vim
+set rtp^=~/.vim/bundle/ag
 set shiftwidth=4
 set smarttab
 set tabstop=4
@@ -28,6 +27,7 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
+Plugin 'rking/ag.vim'
 
 let mapleader = ','
 
