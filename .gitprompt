@@ -1,0 +1,15 @@
+parse_git_branch () {
+    branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
+    if [ $branch ];
+    then
+        echo "($branch)" 
+    fi
+}
+
+BLACK="\[\033[0;38m\]"
+RED="\[\033[0;31m\]"
+RED_BOLD="\[\033[01;31m\]"
+BLUE="\[\033[01;34m\]"
+GREEN="\[\033[0;32m\]"
+
+export PS1="$BLACK\u@$RED\h $GREEN\w$RED_BOLD \$(parse_git_branch)$BLACK "
