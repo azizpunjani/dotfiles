@@ -15,6 +15,13 @@ set smarttab
 set tabstop=4
 set t_Co=256
 
+set undofile
+set undodir=$HOME/.vim/undo
+set undolevels=1000
+set undoreload=10000
+set backupdir=~/.vim/vimtmp,.
+set directory=~/.vim/vimtmp,.
+
 call vundle#begin()
 
 Plugin 'bling/vim-airline'
@@ -24,10 +31,11 @@ Plugin 'tpope/vim-fugitive'
 
 let mapleader = ','
 
-let g:ctrlp_working_path_mode = ''
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_match_window = ''
 let g:ctrlp_max_files = ''
 let g:ctrlp_max_depth=40
+let g:ctrlp_working_path_mode = ''
 
 let g:JSHintHighlightErrorLine = 0
 
@@ -36,26 +44,13 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
-nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-nmap <leader> :TagbarToggle<CR>
-nmap <F4> o<ESC>p
-map <leader>s i <Esc>
-map <leader>sc :setlocal spell! spelllang=en_us<CR>
-nmap <leader>nt :NERDTreeToggle<CR>
-nmap <leader>n :NERDTree<CR>
-autocmd BufWritePre * :%s/\s\+$//e
+nmap <silent><C-j> :set paste<CR>m`o<ESC>``:set nopaste<CR>
+nmap <silent><C-k> :set paste<Cr>m`O<ESC>``:set nopaste<CR>
+nmap <leader>pp o<ESC>p
+nmap <leader>s i <ESC>
+nmap <leader>sc :setlocal spell! spelllang=en_us<CR>
+nmap <leader>nt :NERDTreeToggle<Cr>
+nmap <leader>n :NERDTree<Cr>
 
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
-set undofile
-set undodir=$HOME/.vim/undo
-set undolevels=1000
-set undoreload=10000
-set backupdir=~/.vim/vimtmp,.
-set directory=~/.vim/vimtmp,.
-
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-source ~/.vim/ignore.vim
-source ~/.vim/myGrep.vim
-source ~/.vim/ignore.vim
-
+au BufWritePre * :%s/\s\+$//e
