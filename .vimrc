@@ -24,10 +24,11 @@ Plugin 'tpope/vim-fugitive'
 
 let mapleader = ','
 
-let g:ctrlp_working_path_mode = ''
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_match_window = ''
 let g:ctrlp_max_files = ''
 let g:ctrlp_max_depth=40
+let g:ctrlp_working_path_mode = ''
 
 let g:JSHintHighlightErrorLine = 0
 
@@ -53,9 +54,3 @@ set undolevels=1000
 set undoreload=10000
 set backupdir=~/.vim/vimtmp,.
 set directory=~/.vim/vimtmp,.
-
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-source ~/.vim/ignore.vim
-source ~/.vim/myGrep.vim
-source ~/.vim/ignore.vim
-
