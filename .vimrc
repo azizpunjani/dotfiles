@@ -7,8 +7,6 @@ set expandtab
 set mouse=a
 set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp^=~/.vim/bundle/ctrlp.vim
-set rtp^=~/.vim/bundle/ag
 set shiftwidth=4
 set smarttab
 set tabstop=4
@@ -29,10 +27,13 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rking/ag.vim'
 
+call vundle#end()
+
 let mapleader = ','
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_match_window = ''
+
 let g:ctrlp_max_files = ''
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = ''
