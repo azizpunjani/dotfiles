@@ -22,7 +22,6 @@ set directory=~/.vim/vimtmp,.
 call vundle#begin()
 
 Bundle 'gmarik/vundle'
-
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
 Bundle 'int3/vim-extradite'
@@ -35,9 +34,10 @@ call vundle#end()
 
 filetype plugin indent on
 
-set number
-syntax enable
 set background=dark
+syntax enable
+set number
+
 let g:solarized_termcolors = 256
 colorscheme solarized
 
@@ -60,7 +60,7 @@ nmap <silent><C-j> :set paste<CR>m`o<ESC>``:set nopaste<CR>
 nmap <silent><C-k> :set paste<Cr>m`O<ESC>``:set nopaste<CR>
 nmap <leader>pp o<ESC>p
 nmap <leader>s i <ESC>
-nmap <leader>D "_d d<ESC>
+nmap <leader>d "_d d<ESC>
 nmap <leader>sc :setlocal spell! spelllang=en_us<CR>
 nmap <leader>nt :NERDTreeToggle<Cr>
 nmap <leader>n :NERDTree<Cr>
