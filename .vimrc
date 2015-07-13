@@ -1,5 +1,6 @@
-filetype plugin indent on
-syntax on
+filetype off
+
+set background=dark
 
 set ai
 set backspace=indent,eol,start
@@ -10,7 +11,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set shiftwidth=4
 set smarttab
 set tabstop=4
-set t_Co=256
 
 set undofile
 set undodir=$HOME/.vim/undo
@@ -21,19 +21,30 @@ set directory=~/.vim/vimtmp,.
 
 call vundle#begin()
 
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'rking/ag.vim'
+Bundle 'gmarik/vundle'
+
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
+Bundle 'int3/vim-extradite'
+Bundle 'kien/ctrlp.vim'
+Bundle 'rking/ag.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-fugitive'
 
 call vundle#end()
+
+filetype plugin indent on
+
+set number
+syntax enable
+set background=dark
+let g:solarized_termcolors = 256
+colorscheme solarized
 
 let mapleader = ','
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_match_window = ''
-
 let g:ctrlp_max_files = ''
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = ''
@@ -49,6 +60,7 @@ nmap <silent><C-j> :set paste<CR>m`o<ESC>``:set nopaste<CR>
 nmap <silent><C-k> :set paste<Cr>m`O<ESC>``:set nopaste<CR>
 nmap <leader>pp o<ESC>p
 nmap <leader>s i <ESC>
+nmap <leader>D "_d d<ESC>
 nmap <leader>sc :setlocal spell! spelllang=en_us<CR>
 nmap <leader>nt :NERDTreeToggle<Cr>
 nmap <leader>n :NERDTree<Cr>
