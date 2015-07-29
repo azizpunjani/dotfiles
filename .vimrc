@@ -1,6 +1,6 @@
 filetype off
-hi diffadd ctermfg=green guifg=#00ff00
-hi diffdelete ctermfg=red guifg=#ff0000
+
+
 set ai
 set backspace=indent,eol,start
 set clipboard=unnamed
@@ -16,6 +16,7 @@ set wildignore+=*/bower_components/*
 set wildignore+=*/node_modules/*
 set wildignore+=*/Pear/*
 set wildignore+=.git
+set exrc
 
 set undofile
 set undodir=$HOME/.vim/undo
@@ -71,16 +72,14 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+hi diffadd ctermfg=green guifg=#00ff00
+hi diffdelete ctermfg=red guifg=#ff0000
 
 nmap <silent><C-j> :set paste<CR>m`o<ESC>``:set nopaste<CR>
 nmap <silent><C-k> :set paste<Cr>m`O<ESC>``:set nopaste<CR>
 nmap <leader>pp o<ESC>p
-nmap <leader>s i <ESC>
-nmap <leader>d "_d d<ESC>
+nmap <leader>s <silent>i <ESC>
+nmap <leader>d "_dd<ESC>
 nmap <leader>sc :setlocal spell! spelllang=en_us<CR>
 nmap <leader>nt :NERDTreeToggle<Cr>
 nmap <leader>n :NERDTree<Cr>
