@@ -1,6 +1,5 @@
 filetype off
 
-
 set ai
 set backspace=indent,eol,start
 set clipboard=unnamed
