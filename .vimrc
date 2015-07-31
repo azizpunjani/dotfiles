@@ -3,9 +3,11 @@ filetype off
 set ai
 set backspace=indent,eol,start
 set clipboard=unnamed
+set exrc
 set expandtab
 set mouse=a
 set nocompatible
+set noswapfile
 set rtp+=~/.vim/bundle/Vundle.vim
 set shiftwidth=4
 set smarttab
@@ -15,7 +17,6 @@ set wildignore+=*/bower_components/*
 set wildignore+=*/node_modules/*
 set wildignore+=*/Pear/*
 set wildignore+=.git
-set exrc
 
 set undofile
 set undodir=$HOME/.vim/undo
@@ -33,6 +34,7 @@ Bundle 'int3/vim-extradite'
 Bundle 'itchyny/lightline.vim'
 Bundle 'kablamo/vim-git-log'
 Bundle 'kien/ctrlp.vim'
+Bundle 'mbbill/undotree'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/nerdtree'
@@ -40,6 +42,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'dkprice/vim-easygrep'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 
@@ -71,8 +74,10 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-hi diffadd ctermfg=green guifg=#00ff00
-hi diffdelete ctermfg=red guifg=#ff0000
+highlight diffadd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Green
+highlight diffdelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
+highlight diffchange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
+highlight difftext cterm=none ctermfg=bg ctermbg=Magenta gui=none guifg=bg guibg=Magenta
 
 nmap <silent><C-j> :set paste<CR>m`o<ESC>``:set nopaste<CR>
 nmap <silent><C-k> :set paste<Cr>m`O<ESC>``:set nopaste<CR>
@@ -82,6 +87,7 @@ nmap <leader>d "_dd<ESC>
 nmap <leader>sc :setlocal spell! spelllang=en_us<CR>
 nmap <leader>nt :NERDTreeToggle<Cr>
 nmap <leader>n :NERDTree<Cr>
+nmap <leader>h :UndotreeToggle<Cr>
 
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
 au BufWritePre * :%s/\s\+$//e
