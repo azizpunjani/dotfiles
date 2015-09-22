@@ -5,6 +5,7 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 set exrc
 set expandtab
+set laststatus=2
 set mouse=a
 set nocompatible
 set noswapfile
@@ -27,23 +28,24 @@ set directory=~/.vim/vimtmp
 
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
+Plugin 'dkprice/vim-easygrep'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'einars/js-beautify'
+Plugin 'gmarik/vundle'
 Plugin 'int3/vim-extradite'
-Plugin 'itchyny/lightline.vim'
 Plugin 'kablamo/vim-git-log'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mbbill/undotree'
+Plugin 'msanders/snipmate.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'dkprice/vim-easygrep'
-Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 
@@ -72,12 +74,11 @@ let g:JSHintHighlightErrorLine = 0
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['jshint', 'eslint']
+let g:syntastic_error_symbol= "⚠"
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:airline_theme='behelit'
 
 highlight diffadd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Green
 highlight diffdelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
@@ -98,8 +99,8 @@ nmap <leader>n :NERDTree<Cr>
 nmap <leader>s <Plug>(easymotion-s)
 nmap <leader>s <Plug>(easymotion-s2)
 
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+map <Leader>g <Plug>(easymotion-j)
+map <Leader>t <Plug>(easymotion-k)
 
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
 au BufWritePre * :%s/\s\+$//e
