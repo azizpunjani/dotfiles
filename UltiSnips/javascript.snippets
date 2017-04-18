@@ -1,0 +1,26 @@
+# test snippets
+
+snippet it "it(...)"
+it('${1}', () => {
+    ${VISUAL}$0
+});
+endsnippet
+
+snippet describe "describe(...)"
+describe('$1', () => {
+    ${VISUAL}$0
+});
+endsnippet
+
+snippet for "for (...) {...} (counting up)" b
+for (var ${1:i} = 0, ${2:len} = ${3:Things.length}; $1 < $2; $1++) {
+    ${VISUAL}$0
+}
+endsnippet
+
+# utility snippets
+snippet cl "console.log(...)"
+console.log(${1});
+endsnippet
+
+

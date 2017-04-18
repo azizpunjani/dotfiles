@@ -1,62 +1,47 @@
-filetype off
-
 set ai
 set backspace=indent,eol,start
-set clipboard=unnamed
-set exrc
+set backupcopy=yes
+set backupdir=~/.vim/vimtmp,.
+set clipboard+=unnamed
+set directory=~/.vim/vimtmp,.
 set expandtab
-set laststatus=2
+set ignorecase
 set mouse=a
 set nocompatible
-set noswapfile
+set nu
 set rtp+=~/.vim/bundle/Vundle.vim
 set shiftwidth=4
 set smarttab
+set synmaxcol=200
 set tabstop=4
-set wildignore+=*/tmp/*
-set wildignore+=*/bower_components/*
-set wildignore+=*/node_modules/*
-set wildignore+=*/Pear/*
-set wildignore+=.git
-
+set t_Co=256
 set undofile
 set undodir=$HOME/.vim/undo
 set undolevels=1000
 set undoreload=10000
-set backupdir=~/.vim/vimtmp
-set directory=~/.vim/vimtmp
+set foldmethod=syntax
+set foldlevel=3
 
 call vundle#begin()
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'dkprice/vim-easygrep'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'einars/js-beautify'
-Plugin 'gmarik/vundle'
+Plugin 'honza/vim-snippets'
 Plugin 'int3/vim-extradite'
-Plugin 'kablamo/vim-git-log'
 Plugin 'kien/ctrlp.vim'
-Plugin 'mbbill/undotree'
-Plugin 'msanders/snipmate.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'rking/ag.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'mattn/emmet-vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+Plugin 'scwood/vim-hybrid'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 
-filetype plugin indent on
-
-set number
+syntax on
 set background=dark
-syntax enable
-
-let g:solarized_termcolors = 256
-colorscheme solarized
+colorscheme hybrid
 
 let mapleader = ','
 
@@ -65,44 +50,46 @@ let g:ctrlp_match_window = ''
 let g:ctrlp_max_files = ''
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = ''
-
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
+let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
 
 let g:JSHintHighlightErrorLine = 0
 
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['jshint', 'eslint']
-let g:syntastic_error_symbol= "⚠"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<shift-tab>"
 
-let g:airline_theme='behelit'
-
-highlight diffadd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Green
-highlight diffdelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
-highlight diffchange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
-highlight difftext cterm=none ctermfg=bg ctermbg=Magenta gui=none guifg=bg guibg=Magenta
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/bower_components/*
 
 nmap <silent><C-j> :set paste<CR>m`o<ESC>``:set nopaste<CR>
 nmap <silent><C-k> :set paste<Cr>m`O<ESC>``:set nopaste<CR>
-
 nmap <leader>pp o<ESC>p
-nmap <leader>s <silent>i <ESC>
-nmap <leader>d "_dd<ESC>
-nmap <leader>h :UndotreeToggle<Cr>
-
-nmap <leader>nt :NERDTreeToggle<Cr>
-nmap <leader>n :NERDTree<Cr>
-
-nmap <leader>s <Plug>(easymotion-s)
-nmap <leader>s <Plug>(easymotion-s2)
-
-map <Leader>g <Plug>(easymotion-j)
-map <Leader>t <Plug>(easymotion-k)
+nmap <leader>s i <ESC>
+nmap <leader>sc :setlocal spell! spelllang=en_us<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
+nmap <leader>n :NERDTree<CR>
+nmap <leader>g :G <cword><CR>
+nmap <leader>ff :FF <cword> %<CR>
 
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
+au BufRead,BufNewFile /home/apunjani/portal4/current/content/public/js/Portal4/*.js set tabstop=4 shiftwidth=4
 au BufWritePre * :%s/\s\+$//e
+au FileType javascript setlocal shiftwidth=2 tabstop=2
+au FileType scss setlocal shiftwidth=2 tabstop=2
+au! FileType qf nnoremap <buffer> <leader><Enter> <C-w><Enter><C-w>L
 
-source ~/.vim/qargs.vim
+command -nargs=+ G execute 'silent Ggrep!' <q-args> | cw | copen | redraw!
+command -nargs=+ FF execute 'silent Ggrep' <q-args> | cw | copen | redraw!
+
+function! PropagatePasteBufferToOSX()
+  let @n=getreg('"')
+  call system('pbcopy-remote', @n)
+  echo "done"
+endfunction
+
+function! PopulatePasteBufferFromOSX()
+  let @" = system('pbpaste-remote')
+  echo "done"
+endfunction
+
+nnoremap <leader>1 :call PopulatePasteBufferFromOSX()<cr>
+nnoremap <leader>2 :call PropagatePasteBufferToOSX()<cr>
